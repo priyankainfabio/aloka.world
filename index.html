@@ -6,23 +6,12 @@
 <title>Aloka World</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
 <style>
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   background:#ebe4d9;
   color:#2d2a27;
@@ -30,12 +19,23 @@ body{
   font-family:'Inter',sans-serif;
 }
 
-/* ---------------- NAV ---------------- */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9999;
+  opacity:.08;
+  background-image:
+  radial-gradient(rgba(255,255,255,.8) 1px, transparent 1px);
+  background-size:3px 3px;
+  mix-blend-mode:overlay;
+}
 
+/* NAV */
 .nav{
   position:fixed;
-  top:0;
-  left:0;
+  top:0;left:0;
   width:100%;
   height:90px;
   padding:0 50px;
@@ -44,23 +44,18 @@ body{
   justify-content:space-between;
   z-index:999;
   backdrop-filter:blur(18px);
-  background:rgba(235,228,217,0.72);
-  border-bottom:1px solid rgba(0,0,0,0.06);
+  background:rgba(235,228,217,.72);
+  border-bottom:1px solid rgba(0,0,0,.06);
+  transition:.4s ease;
 }
-
 .logo{
   font-family:'Cormorant Garamond',serif;
   color:#b88853;
-  line-height:.85;
 }
-
-
-
 .logo span{
   font-size:20px;
-  letter-spacing:.10em;
+  letter-spacing:.1em;
 }
-
 .nav-center{
   position:absolute;
   left:50%;
@@ -68,7 +63,6 @@ body{
   display:flex;
   gap:70px;
 }
-
 .nav-center a{
   text-decoration:none;
   color:#26231f;
@@ -77,24 +71,19 @@ body{
   text-transform:uppercase;
   position:relative;
 }
-
 .nav-center a::after{
   content:"";
   position:absolute;
   left:0;
   bottom:-10px;
-  width:0%;
+  width:0;
   height:1px;
   background:#b88853;
   transition:.5s;
 }
+.nav-center a:hover::after{width:100%}
 
-.nav-center a:hover::after{
-  width:100%;
-}
-
-/* right menu */
-
+/* MENU ICON */
 .menu-btn{
   width:52px;
   height:42px;
@@ -109,26 +98,18 @@ body{
   position:relative;
   z-index:900;
 }
-
 .menu-btn span{
   display:block;
   height:1.5px;
   background:#b88853;
   transition:.35s ease;
 }
+.menu-btn span:nth-child(1){width:14px}
+.menu-btn span:nth-child(2){width:26px}
+.menu-btn span:nth-child(3){width:38px}
+.menu-btn:hover span{width:38px}
+body.menu-open .menu-btn{display:none!important}
 
-.menu-btn span:nth-child(1){ width:14px; }
-.menu-btn span:nth-child(2){ width:26px; }
-.menu-btn span:nth-child(3){ width:38px; }
-
-.menu-btn:hover span{
-  width:38px;
-}
-.menu-btn.is-hidden{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-}
 .menu-overlay{
   position:fixed;
   inset:0;
@@ -138,13 +119,10 @@ body{
   transition:.45s ease;
   z-index:1000;
 }
-
 .menu-overlay.active{
   opacity:1;
   visibility:visible;
 }
-
-
 .side-menu{
   position:fixed;
   top:0;
@@ -159,11 +137,7 @@ body{
   flex-direction:column;
   gap:28px;
 }
-
-.side-menu.active{
-  right:0;
-}
-
+.side-menu.active{right:0}
 .side-menu a{
   font-family:'Cormorant Garamond',serif;
   font-size:42px;
@@ -173,16 +147,10 @@ body{
   padding-bottom:18px;
   transition:.35s ease;
 }
-
 .side-menu a:hover{
   color:#b88853;
   transform:translateX(10px);
 }
-
-body.menu-open .menu-btn{
-  display:none !important;
-}
-
 .close-menu{
   position:absolute;
   top:44px;
@@ -194,7 +162,6 @@ body.menu-open .menu-btn{
   cursor:pointer;
   z-index:9999;
 }
-
 .close-menu::before,
 .close-menu::after{
   content:"";
@@ -205,72 +172,73 @@ body.menu-open .menu-btn{
   height:1.5px;
   background:#b88853;
 }
+.close-menu::before{transform:rotate(45deg)}
+.close-menu::after{transform:rotate(-45deg)}
 
-.close-menu::before{
-  transform:rotate(45deg);
-}
-
-.close-menu::after{
-  transform:rotate(-45deg);
-}
-
-/* ---------------- HERO ---------------- */
-
+/* HERO */
 .hero{
   position:relative;
   height:100vh;
   overflow:hidden;
+  background:#111;
 }
-
 .hero img{
   width:100%;
   height:100%;
   object-fit:cover;
-  transform:scale(1.1);
+  transform:scale(1.12);
   transition:transform .4s ease-out;
 }
-
 .hero-overlay{
   position:absolute;
   inset:0;
-  background:linear-gradient(to bottom,
-  rgba(0,0,0,.1),
-  rgba(0,0,0,.25));
+  background:
+  radial-gradient(circle at 20% 40%, rgba(184,136,83,.22), transparent 34%),
+  linear-gradient(to bottom,rgba(0,0,0,.12),rgba(0,0,0,.6));
 }
-
 .hero-content{
   position:absolute;
-  bottom:120px;
+  bottom:115px;
   left:80px;
-  max-width:850px;
+  max-width:900px;
   color:white;
 }
-
 .hero-sub{
-  letter-spacing:.3em;
+  letter-spacing:.38em;
   text-transform:uppercase;
-  margin-bottom:25px;
+  margin-bottom:26px;
   font-size:12px;
-  opacity:.85;
+  opacity:.9;
 }
-
 .hero h1{
   font-family:'Cormorant Garamond',serif;
-  font-size:110px;
-  line-height:.88;
+  font-size:118px;
+  line-height:.86;
   font-weight:500;
 }
-
+.hero h1 span{
+  color:#d8a76c;
+  font-style:italic;
+}
 .hero p{
   margin-top:35px;
   font-size:18px;
-  max-width:620px;
-  line-height:1.8;
+  max-width:660px;
+  line-height:1.9;
   opacity:.9;
 }
+.scroll-note{
+  position:absolute;
+  right:50px;
+  bottom:60px;
+  color:#d8a76c;
+  writing-mode:vertical-rl;
+  letter-spacing:.3em;
+  font-size:10px;
+  text-transform:uppercase;
+}
 
-/* ---------------- PANELS ---------------- */
-
+/* PANELS */
 .story-panel{
   min-height:100vh;
   display:grid;
@@ -279,11 +247,7 @@ body.menu-open .menu-btn{
   overflow:hidden;
   position:relative;
 }
-
-.story-content{
-  padding:110px;
-}
-
+.story-content{padding:110px;z-index:2}
 .label{
   color:#b88853;
   text-transform:uppercase;
@@ -291,7 +255,6 @@ body.menu-open .menu-btn{
   font-size:12px;
   margin-bottom:30px;
 }
-
 .story-content h2{
   font-family:'Cormorant Garamond',serif;
   font-size:86px;
@@ -299,83 +262,47 @@ body.menu-open .menu-btn{
   font-weight:500;
   margin-bottom:35px;
 }
-
 .story-content p{
   font-size:18px;
   line-height:2;
   color:#514a42;
   max-width:540px;
 }
-
 .story-image{
   position:relative;
   height:100%;
   overflow:hidden;
 }
-
 .story-image img{
   width:100%;
   height:100%;
   object-fit:cover;
   transition:transform .25s linear;
-  transform:scale(1.06);
+  transform:scale(1.08);
 }
-
-/* alternating */
-
-.story-panel.reverse .story-content{
-  order:2;
-}
-
-.story-panel.reverse .story-image{
-  order:1;
-}
-
-/* floating card effect */
-
-.story-content{
-  z-index:2;
-}
-
+.story-panel.reverse .story-content{order:2}
+.story-panel.reverse .story-image{order:1}
 .story-content-inner{
   background:rgba(255,255,255,.24);
   backdrop-filter:blur(18px);
   padding:70px;
   border:1px solid rgba(0,0,0,.05);
-  transform-style:preserve-3d;
   transition:.5s;
 }
-
 .story-content-inner:hover{
-  transform:
-  rotateX(3deg)
-  rotateY(-4deg)
-  translateY(-10px);
+  transform:rotateX(3deg) rotateY(-4deg) translateY(-10px);
 }
 
-
-/* =========================
-   MAGAZINE SECTION
-========================= */
-
+/* MAGAZINE */
 .magazine-section{
   min-height:100vh;
   background:#efe8de;
-
   display:grid;
   grid-template-columns:1fr 1fr;
-
   align-items:center;
-
-  padding:
-  120px
-  0
-  120px
-  90px;
-
+  padding:120px 0 120px 90px;
   overflow:hidden;
 }
-
 .magazine-left h2{
   font-family:'Cormorant Garamond',serif;
   font-size:78px;
@@ -384,7 +311,6 @@ body.menu-open .menu-btn{
   color:#2a2622;
   margin-bottom:35px;
 }
-
 .magazine-left p{
   max-width:560px;
   line-height:1.9;
@@ -392,88 +318,55 @@ body.menu-open .menu-btn{
   font-size:18px;
   margin-bottom:45px;
 }
-
 .mag-btn{
   display:inline-flex;
-  align-items:center;
-  justify-content:center;
   padding:20px 40px;
   border:1px solid #2b2723;
-  text-decoration:none;
   color:#2b2723;
+  text-decoration:none;
   text-transform:uppercase;
   letter-spacing:.14em;
   font-size:12px;
   transition:.45s;
 }
-
 .mag-btn:hover{
   background:#2b2723;
   color:#f4eee6;
   transform:translateY(-4px);
 }
-
-/* RIGHT SIDE */
-
 .magazine-right{
   position:relative;
-
   height:100vh;
-
   display:flex;
   align-items:center;
   justify-content:flex-end;
-
   overflow:hidden;
 }
-
 .book-stack{
   position:relative;
-
   width:100%;
   height:100%;
-
   display:flex;
   align-items:center;
   justify-content:flex-end;
-
-  padding-right:-120px;
 }
-
-/* MAIN MAGAZINE */
-
 .book-main{
-
-  width:980px !important;
-
+  width:980px!important;
   max-width:none;
-
   height:auto;
-
   position:absolute;
-
   right:-70px;
   top:50%;
-
   transform:
   translateY(-50%)
   perspective(3000px)
   rotateY(-12deg)
   rotateX(2deg)
   rotateZ(-2deg);
-
-  filter:
-  drop-shadow(0 80px 70px rgba(0,0,0,.16));
-
-  transition:
-  transform 1s cubic-bezier(.19,1,.22,1);
-
+  filter:drop-shadow(0 80px 70px rgba(0,0,0,.16));
+  transition:transform 1s cubic-bezier(.19,1,.22,1);
 }
-
-/* HOVER EFFECT */
-
 .book-stack:hover .book-main{
-
   transform:
   translateY(-52%)
   perspective(3000px)
@@ -481,65 +374,13 @@ body.menu-open .menu-btn{
   rotateX(1deg)
   rotateZ(-1deg)
   scale(1.015);
-
 }
 
-/* HIDDEN OLD STACKS */
-
-.book-bottom,
-.book-middle{
-  display:none;
-}
-
-
-/* FLOAT */
-
-@keyframes floatBook{
-
-  0%{
-    transform:translateY(0px);
-  }
-
-  50%{
-    transform:translateY(-18px);
-  }
-
-  100%{
-    transform:translateY(0px);
-  }
-
-}
-
-/* RESPONSIVE */
-
-@media(max-width:1100px){
-
-  .magazine-section{
-    grid-template-columns:1fr;
-    gap:90px;
-    padding:120px 40px;
-  }
-
-  .magazine-left h2{
-    font-size:92px;
-  }
-
-  .magazine-right{
-    height:560px;
-    max-width: 720px;
-  }
-
-  .book-stack{
-    width:320px;
-    height:450px;
-  }
-
-}
-
+/* ABOUT AWARDS */
 .about-awards-section{
   min-height:100vh;
   background:#fffaf3;
-  padding:120px 70px;
+  padding:105px 70px;
   display:grid;
   grid-template-columns:1fr 340px;
   gap:80px;
@@ -547,60 +388,28 @@ body.menu-open .menu-btn{
   border-top:1px solid rgba(0,0,0,.06);
   border-bottom:1px solid rgba(0,0,0,.06);
 }
-
 .about-awards-main{
   max-width:860px;
   margin:0 auto;
   text-align:center;
 }
-
-.trust-seal{
-  width:118px;
-  height:118px;
-  border:1px solid rgba(0,0,0,.2);
-  border-radius:50%;
-  margin:0 auto 34px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  color:#b88853;
-}
-
-.trust-seal span{
-  font-family:'Cormorant Garamond',serif;
-  font-size:42px;
-  line-height:1;
-}
-
-.trust-seal p{
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  max-width:82px;
-  line-height:1.4;
-  margin-top:6px;
-  color:#777;
-}
 .heritage-seal-img{
-  width:300px;
+  width:190px;
   display:block;
-  margin:0 auto 12px;
+  margin:0 auto 14px;
   opacity:.96;
-  filter: drop-shadow(0 8px 18px rgba(0,0,0,.06));
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.06));
 }
-
 .about-awards-main h2{
   font-family:'Cormorant Garamond',serif;
   font-size:58px;
   font-weight:500;
   letter-spacing:.10em;
   text-transform:uppercase;
-  margin-top:-1px;
-  margin-bottom:6px;
+  margin-top:-4px;
+  margin-bottom:8px;
   line-height:1;
 }
-
 .about-awards-main h3{
   font-family:'Cormorant Garamond',serif;
   font-size:30px;
@@ -608,7 +417,6 @@ body.menu-open .menu-btn{
   line-height:1.2;
   margin-bottom:34px;
 }
-
 .about-awards-main p{
   font-family:Georgia,serif;
   font-size:18px;
@@ -617,7 +425,6 @@ body.menu-open .menu-btn{
   margin:0 auto 28px;
   max-width:820px;
 }
-
 .black-btn{
   display:inline-flex;
   align-items:center;
@@ -632,17 +439,14 @@ body.menu-open .menu-btn{
   letter-spacing:.04em;
   transition:.35s ease;
 }
-
 .black-btn:hover{
   background:#b88853;
   transform:translateY(-4px);
 }
-
 .awards-side{
   border-left:1px solid rgba(0,0,0,.12);
   padding-left:34px;
 }
-
 .side-label{
   font-size:11px;
   letter-spacing:.24em;
@@ -650,7 +454,6 @@ body.menu-open .menu-btn{
   color:#b88853;
   margin-bottom:24px;
 }
-
 .award-item{
   font-family:'Cormorant Garamond',serif;
   font-size:26px;
@@ -660,586 +463,347 @@ body.menu-open .menu-btn{
   color:#2d2a27;
 }
 
-@media(max-width:1000px){
-  .about-awards-section{
-    grid-template-columns:1fr;
-    padding:90px 28px;
-  }
-
-  .awards-side{
-    border-left:0;
-    padding-left:0;
-  }
-}
-
-/* ---------------- REFLECTIONS ---------------- */
-
+/* REFLECTIONS */
 .reflections{
   padding:100px 50px;
+  background:#ebe4d9;
 }
-
-.reflections-title{
-  margin-bottom:50px;
-}
-
-.reflections-title h2{
+.reflections-title{margin-bottom:50px}
+.reflections h2{
   font-family:'Cormorant Garamond',serif;
   font-size:92px;
   font-weight:500;
 }
-
 .reflection-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:35px;
 }
-
 .ref-card{
   background:#f5efe5;
   border:1px solid rgba(0,0,0,.06);
   overflow:hidden;
   transition:.5s;
 }
-
-.ref-card:hover{
-  transform:translateY(-15px);
-}
-
+.ref-card:hover{transform:translateY(-15px)}
 .ref-card-img{
   height:420px;
   overflow:hidden;
 }
-
 .ref-card img{
   width:100%;
   height:100%;
   object-fit:cover;
   transition:1s;
 }
-
-.ref-card:hover img{
-  transform:scale(1.08);
-}
-
-.ref-card-content{
-  padding:35px;
-}
-
+.ref-card:hover img{transform:scale(1.08)}
+.ref-card-content{padding:35px}
 .ref-card-content h3{
   font-family:'Cormorant Garamond',serif;
   font-size:42px;
   margin-bottom:18px;
   font-weight:500;
 }
-
 .ref-card-content p{
   line-height:1.9;
   color:#5a534b;
 }
 
-/* =========================
-   PREMIUM FOOTER
-========================= */
-
+/* FOOTER */
 .footer{
   position:relative;
   background:
   radial-gradient(circle at 85% 60%, rgba(184,136,83,.12), transparent 28%),
   #14110f;
-
   color:#e7dccd;
-
   padding:110px 70px 38px;
-
   overflow:hidden;
 }
-
-/* TOP */
-
 .footer-top{
   display:grid;
   grid-template-columns:1.4fr .8fr .8fr .9fr;
   gap:80px;
-
   padding-bottom:70px;
-
   border-bottom:1px solid rgba(255,255,255,.08);
 }
-
-/* BRAND */
-
-.footer-brand{
-  max-width:520px;
-}
-
 .footer-logo-box{
   margin-bottom:18px;
 }
-
 .footer-logo-box img{
-  width:220px;
+  width:150px;
   display:block;
-  opacity:.96;
-
-  filter:
-  drop-shadow(0 10px 22px rgba(184,136,83,.12));
+  opacity:.98;
+  filter:drop-shadow(0 14px 28px rgba(184,136,83,.16));
 }
-
 .footer-brand p{
+  max-width:520px;
   font-size:18px;
   line-height:2;
   color:#b8ab99;
   margin-bottom:34px;
 }
-
-/* STATS */
-
 .footer-stats{
   display:flex;
   gap:14px;
   flex-wrap:wrap;
 }
-
 .footer-stat{
   border:1px solid rgba(255,255,255,.1);
   padding:14px 18px;
-
   font-size:11px;
   letter-spacing:.22em;
   text-transform:uppercase;
-
   color:#f1e6d7;
-
-  background:rgba(255,255,255,.02);
 }
-
-/* TITLES */
-
 .footer-col h4{
   color:#b88853;
   margin-bottom:28px;
-
   font-size:12px;
   letter-spacing:.24em;
   text-transform:uppercase;
 }
-
-/* LINKS */
-
 .footer-col a{
   display:block;
-
   color:#e7dccd;
   text-decoration:none;
-
   margin-bottom:18px;
-
   font-size:18px;
-
   transition:.35s ease;
 }
-
 .footer-col a:hover{
   color:#b88853;
   transform:translateX(6px);
 }
-
-/* CONTACT */
-
 .footer-contact-item{
   font-size:18px;
   line-height:1.9;
   color:#d5c8b8;
   margin-bottom:18px;
 }
-
-/* SOCIAL */
-
 .footer-social{
   display:flex;
   gap:12px;
   margin-top:30px;
 }
-
 .footer-social a{
   width:48px;
   height:48px;
-
   border:1px solid rgba(255,255,255,.12);
-
   display:flex;
   align-items:center;
   justify-content:center;
-
+  color:#f4eadc;
+  text-decoration:none;
   background:rgba(255,255,255,.02);
-
   transition:.35s ease;
 }
-
 .footer-social a:hover{
   background:#b88853;
   border-color:#b88853;
-
   transform:translateY(-4px);
 }
-
-/* BOTTOM */
-
 .footer-bottom{
   padding-top:28px;
-
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:30px;
-
   flex-wrap:wrap;
 }
-
-/* LEGAL */
-
+.footer-copy{
+  color:#8f857a;
+  font-size:15px;
+}
 .footer-legal{
   display:flex;
   gap:34px;
 }
-
 .footer-legal a{
   color:#8f857a;
   text-decoration:none;
   transition:.3s;
 }
-
-.footer-legal a:hover{
-  color:#b88853;
-}
-
-/* COPYRIGHT */
-
-.footer-copy{
-  color:#8f857a;
-  font-size:15px;
-}
-
-/* SITE CREDIT */
-
-.site-credit{
-  display:flex;
-  justify-content:flex-end;
-}
-
+.footer-legal a:hover{color:#b88853}
 .site-credit-inner{
   display:inline-flex;
   align-items:center;
   gap:12px;
-
   padding:10px 16px;
-
   border-radius:14px;
-
   border:1px solid rgba(255,255,255,.12);
-
   background:rgba(255,255,255,.03);
-
   transition:.35s ease;
 }
-
-.site-credit-inner:hover{
-  background:rgba(255,255,255,.06);
-}
-
-.site-credit-inner a{
-  opacity:.88;
-  transition:.3s;
-}
-
-.site-credit-inner a:hover{
-  opacity:1;
-}
-
+.site-credit-inner:hover{background:rgba(255,255,255,.06)}
 .site-credit-inner img{
   height:12px;
   width:auto;
   display:block;
 }
-
 .site-divider{
   width:1px;
   height:12px;
   background:rgba(255,255,255,.22);
 }
 
-/* RESPONSIVE */
-
-@media(max-width:1100px){
-
-  .footer{
-    padding:90px 30px 34px;
-  }
-
-  .footer-top{
-    grid-template-columns:1fr;
-    gap:55px;
-  }
-
-  .footer-bottom{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-}
-
-/* ---------------- reveal ---------------- */
-
+/* REVEAL */
 .reveal{
   opacity:0;
   transform:translateY(80px);
   transition:1.2s cubic-bezier(.2,.8,.2,1);
 }
-
 .reveal.active{
   opacity:1;
   transform:translateY(0);
 }
 
-/* ---------------- responsive ---------------- */
-
 @media(max-width:1100px){
-
-  .story-panel{
+  .nav-center{display:none}
+  .hero h1{font-size:70px}
+  .story-panel,
+  .story-panel.reverse{
     grid-template-columns:1fr;
   }
-
-  .story-panel.reverse .story-content{
-    order:1;
-  }
-
-  .story-panel.reverse .story-image{
-    order:2;
-  }
-
-  .story-image{
-    height:70vh;
-  }
-
-  .reflection-grid{
+  .story-panel.reverse .story-content{order:1}
+  .story-panel.reverse .story-image{order:2}
+  .story-image{height:70vh}
+  .magazine-section{
     grid-template-columns:1fr;
+    padding:100px 30px;
   }
-
-  .hero h1{
-    font-size:70px;
+  .magazine-left h2{font-size:58px}
+  .book-main{
+    width:720px!important;
+    right:-140px;
   }
-
-  .story-content h2,
-  .full-content h2,
-  .reflections-title h2{
-    font-size:58px;
+  .about-awards-section{
+    grid-template-columns:1fr;
+    padding:90px 28px;
   }
-
+  .awards-side{
+    border-left:0;
+    padding-left:0;
+  }
+  .reflection-grid{grid-template-columns:1fr}
+  .footer{
+    padding:90px 30px 34px;
+  }
   .footer-top{
-    flex-direction:column;
-    gap:60px;
+    grid-template-columns:1fr;
+    gap:55px;
   }
-
-  .nav-center{
-    display:none;
-  }
-
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
-
 <nav class="nav">
-
-  <div class="logo">
-    
-    <span>aloka.world</span>
-  </div>
+  <div class="logo"><span>aloka.world</span></div>
 
   <div class="nav-center">
-    <a href="#">About</a>
-    <a href="#">Wonderful World</a>
-    <a href="#">Reflections</a>
+    <a href="#about">About</a>
+    <a href="#wonderful">Wonderful World</a>
+    <a href="#reflections">Reflections</a>
   </div>
 
   <button class="menu-btn" id="openMenu" aria-label="Open menu">
-  <span></span><span></span><span></span>
-</button>
-
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <div class="menu-overlay" id="menuOverlay"></div>
 
 <div class="side-menu" id="sideMenu">
   <button class="close-menu" id="closeMenu" aria-label="Close menu"></button>
-
-  <a href="#">Magnum Editions</a>
-  <a href="#">Aloka</a>
-  <a href="#">Aloka Memorial Trust</a>
-  <a href="#">Press & Recognition</a>
-  <a href="#">Correspondence</a>
+  <a href="#magazine">Magnum Editions</a>
+  <a href="#about">Aloka</a>
+  <a href="#about">Aloka Memorial Trust</a>
+  <a href="#press">Press & Recognition</a>
+  <a href="#footer">Correspondence</a>
 </div>
 
-
-
-
-<!-- HERO -->
-
 <section class="hero">
-
   <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1800&auto=format&fit=crop">
-
   <div class="hero-overlay"></div>
 
   <div class="hero-content">
-
-    <div class="hero-sub">
-      Landscapes • Memory • Stewardship
-    </div>
-
-    <h1>
-      A Life<br>
-      Toward Wonder
-    </h1>
-
+    <div class="hero-sub">Landscapes • Memory • Stewardship</div>
+    <h1>A Life<br><span>Toward</span> Wonder</h1>
     <p>
-      A quiet cultural journal exploring landscapes,
-      memory, conservation, and the enduring dialogue
-      between geography and civilization.
+      A quiet cultural journal exploring landscapes, memory,
+      conservation, and the enduring dialogue between geography and civilization.
     </p>
-
   </div>
 
+  <div class="scroll-note">Scroll</div>
 </section>
 
-<!-- PANEL 1 -->
-
-<section class="story-panel reveal">
-
+<section class="story-panel reveal" id="about">
   <div class="story-content">
-
     <div class="story-content-inner">
-
-      <div class="label">
-        About
-      </div>
-
-      <h2>
-        Landscapes<br>
-        Remember
-      </h2>
-
+      <div class="label">About</div>
+      <h2>Landscapes<br>Remember</h2>
       <p>
-        Across decades of travel and cultural reflection,
-        Aloka World emerged from a belief that landscapes
-        are not merely scenery. They hold memory,
+        Across decades of travel and cultural reflection, Aloka World emerged
+        from a belief that landscapes are not merely scenery. They hold memory,
         identity, silence, and inheritance.
       </p>
-
     </div>
-
   </div>
 
   <div class="story-image">
     <img class="parallax" src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=1600&auto=format&fit=crop">
   </div>
-
 </section>
 
-<!-- PANEL 2 -->
-
-<section class="story-panel reverse reveal">
-
+<section class="story-panel reverse reveal" id="wonderful">
   <div class="story-content">
-
     <div class="story-content-inner">
-
-      <div class="label">
-        Wonderful World
-      </div>
-
-      <h2>
-        Quiet Civilisations
-      </h2>
-
+      <div class="label">Wonderful World</div>
+      <h2>Quiet Civilisations</h2>
       <p>
-        The Wonderful World series reflects on places
-        where silence, ecological dignity, and cultural
-        continuity still survive beyond modern excess.
+        The Wonderful World series reflects on places where silence,
+        ecological dignity, and cultural continuity still survive beyond modern excess.
       </p>
-
     </div>
-
   </div>
 
   <div class="story-image">
     <img class="parallax" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop">
   </div>
-
 </section>
 
-<!-- MAGAZINE SECTION -->
-
-<section class="magazine-section reveal">
-
+<section class="magazine-section reveal" id="magazine">
   <div class="magazine-left">
-
-    <div class="label">
-      Publishing Journal
-    </div>
-
-    <h2>
-      The Cultural Journal<br>
-      for Wonder Seekers
-    </h2>
-
+    <div class="label">Publishing Journal</div>
+    <h2>The Cultural Journal<br>for Wonder Seekers</h2>
     <p>
-      Dedicated to landscapes, memory, conservation,
-      and cultural reflection, Aloka World presents
-      essays, visual journeys, and long-form storytelling
+      Dedicated to landscapes, memory, conservation, and cultural reflection,
+      Aloka World presents essays, visual journeys, and long-form storytelling
       inspired by quiet civilizations and enduring places.
     </p>
-
-    <a href="#" class="mag-btn">
-      Explore Reflections
-    </a>
-
+    <a href="#reflections" class="mag-btn">Explore Reflections</a>
   </div>
 
   <div class="magazine-right">
-
     <div class="book-stack">
-
-  <img 
-    class="book-main"
-    src="/assets/book.png"
-    alt="Wonderful World Journal"
-  >
-
-</div>
-
+      <img class="book-main" src="/assets/book.png" alt="Wonderful World Journal">
+    </div>
   </div>
-
 </section>
 
-<section class="about-awards-section reveal">
-
+<section class="about-awards-section reveal" id="press">
   <div class="about-awards-main">
-
     <img src="/assets/seal.png" alt="Aloka Seal" class="heritage-seal-img">
 
     <h2>Aloka World</h2>
-
     <h3>The Cultural Journal of Landscapes, Memory & Stewardship</h3>
 
     <p>
       Aloka World is a quiet cultural platform dedicated to visual storytelling,
-      conservation, publishing, and reflective essays on nature, nations,
-      memory, and civilisational responsibility.
+      conservation, publishing, and reflective essays on nature, nations, memory,
+      and civilisational responsibility.
     </p>
 
     <p>
@@ -1249,13 +813,10 @@ body.menu-open .menu-btn{
     </p>
 
     <a href="#" class="black-btn">Why This Work Matters?</a>
-
   </div>
 
   <aside class="awards-side">
-
     <div class="side-label">Press & Recognition</div>
-
     <div class="award-item">Vishisht Seva Medal</div>
     <div class="award-item">Times Power Icon 2018</div>
     <div class="award-item">Monochrome Photography Awards 2020</div>
@@ -1265,113 +826,59 @@ body.menu-open .menu-btn{
     <div class="award-item">Architect & Interiors India</div>
     <div class="award-item">Decor Journal India</div>
     <div class="award-item">Hospitality News</div>
-
   </aside>
-
 </section>
 
-<!-- REFLECTIONS -->
-
-<section class="reflections reveal">
-
-  <div class="reflections-title"></div>
-
-    <div class="label">
-      Essays & Field Notes
-    </div>
-
-    <h2>
-      Reflections
-    </h2>
-
+<section class="reflections reveal" id="reflections">
+  <div class="reflections-title">
+    <div class="label">Essays & Field Notes</div>
+    <h2>Reflections</h2>
   </div>
 
   <div class="reflection-grid">
-
     <div class="ref-card">
-
       <div class="ref-card-img">
         <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1400&auto=format&fit=crop">
       </div>
-
       <div class="ref-card-content">
-
-        <h3>
-          Morocco
-        </h3>
-
-        <p>
-          Landscapes do not merely appear beautiful;
-          they feel inhabited by memory.
-        </p>
-
+        <h3>Morocco</h3>
+        <p>Landscapes do not merely appear beautiful; they feel inhabited by memory.</p>
       </div>
-
     </div>
 
     <div class="ref-card">
-
       <div class="ref-card-img">
         <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=1400&auto=format&fit=crop">
       </div>
-
       <div class="ref-card-content">
-
-        <h3>
-          Silence
-        </h3>
-
-        <p>
-          Silence survives only where societies consciously
-          protect scale and ecological dignity.
-        </p>
-
+        <h3>Silence</h3>
+        <p>Silence survives only where societies consciously protect scale and ecological dignity.</p>
       </div>
-
     </div>
 
     <div class="ref-card">
-
       <div class="ref-card-img">
         <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1400&auto=format&fit=crop">
       </div>
-
       <div class="ref-card-content">
-
-        <h3>
-          Stewardship
-        </h3>
-
-        <p>
-          Preservation is not nostalgia —
-          it is responsibility toward continuity.
-        </p>
-
+        <h3>Stewardship</h3>
+        <p>Preservation is not nostalgia — it is responsibility toward continuity.</p>
       </div>
-
     </div>
-
   </div>
-
 </section>
 
-<!-- FOOTER -->
-
-<footer class="footer">
-
+<footer class="footer" id="footer">
   <div class="footer-top">
 
-    <!-- BRAND -->
     <div class="footer-brand">
-
       <div class="footer-logo-box">
         <img src="/assets/seal.png" alt="Aloka World">
       </div>
 
       <p>
-        Aloka World is a quiet cultural journal exploring
-        landscapes, memory, stewardship, publishing,
-        and reflective storytelling across civilizations.
+        Aloka World is a quiet cultural journal exploring landscapes,
+        memory, stewardship, publishing, and reflective storytelling across civilizations.
       </p>
 
       <div class="footer-stats">
@@ -1379,73 +886,40 @@ body.menu-open .menu-btn{
         <div class="footer-stat">Visual Essays</div>
         <div class="footer-stat">Since 2008</div>
       </div>
-
     </div>
 
-    <!-- EXPLORE -->
     <div class="footer-col">
-
       <h4>Explore</h4>
-
-      <a href="#">About</a>
-      <a href="#">Wonderful World</a>
-      <a href="#">Reflections</a>
-      <a href="#">Correspondence</a>
-
+      <a href="#about">About</a>
+      <a href="#wonderful">Wonderful World</a>
+      <a href="#reflections">Reflections</a>
+      <a href="#footer">Correspondence</a>
     </div>
 
-    <!-- CONTACT -->
     <div class="footer-col">
-
       <h4>Contact</h4>
-
-      <div class="footer-contact-item">
-        contact@aloka.world
-      </div>
-
-      <div class="footer-contact-item">
-        Publishing Division
-      </div>
-
-      <div class="footer-contact-item">
-        Press & Recognition
-      </div>
-
+      <div class="footer-contact-item">contact@aloka.world</div>
+      <div class="footer-contact-item">Publishing Division</div>
+      <div class="footer-contact-item">Press & Recognition</div>
     </div>
 
-    <!-- OFFICE -->
     <div class="footer-col">
-
       <h4>Head Office</h4>
-
       <div class="footer-contact-item">
         Cultural Publishing House<br>
         New Delhi, India
       </div>
 
-<div class="footer-social">
-
-  <a href="#">
-    <i class="fab fa-instagram"></i>
-  </a>
-
-  <a href="#">
-    <i class="fab fa-pinterest-p"></i>
-  </a>
-
-  <a href="#">
-    <i class="fab fa-youtube"></i>
-  </a>
-
-</div>
-
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
     </div>
 
   </div>
 
-  <!-- BOTTOM -->
   <div class="footer-bottom">
-
     <div class="footer-copy">
       © Aloka World — Landscapes, Memory & Stewardship
     </div>
@@ -1455,11 +929,8 @@ body.menu-open .menu-btn{
       <a href="#">Terms & Conditions</a>
     </div>
 
-    <!-- SITE CREDIT -->
     <div class="site-credit">
-
       <div class="site-credit-inner">
-
         <a href="https://fabulousmedia.in/" target="_blank">
           <img src="/assets/fabulous-logo.png" alt="Fabulous Media">
         </a>
@@ -1469,104 +940,70 @@ body.menu-open .menu-btn{
         <a href="https://gocommercially.com/" target="_blank">
           <img src="/assets/gocommercially-logo.png" alt="GoCommercially">
         </a>
-
       </div>
-
     </div>
-
   </div>
-
 </footer>
 
 <script>
-
-/* reveal */
-
-const reveals = document.querySelectorAll(".reveal");
-
-const observer = new IntersectionObserver((entries)=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-entry.target.classList.add("active");
-}
-
-});
-
-},{
-threshold:0.12
-});
-
-reveals.forEach(el=>{
-observer.observe(el);
-});
-
-/* parallax */
+const reveals=document.querySelectorAll(".reveal");
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("active");
+    }
+  });
+},{threshold:.12});
+reveals.forEach(el=>observer.observe(el));
 
 window.addEventListener("scroll",()=>{
+  const scrolled=window.scrollY;
 
-const scrolled = window.scrollY;
+  const heroImg=document.querySelector(".hero img");
+  if(heroImg){
+    heroImg.style.transform=`scale(1.12) translateY(${scrolled*.08}px)`;
+  }
 
-document.querySelectorAll(".parallax").forEach(img=>{
+  document.querySelectorAll(".parallax").forEach(img=>{
+    const rect=img.getBoundingClientRect();
+    img.style.transform=`scale(1.1) translateY(${rect.top*-0.05}px)`;
+  });
 
-const speed = 0.08;
-img.style.transform =
-`scale(1.08) translateY(${scrolled * speed}px)`;
-
+  const nav=document.querySelector(".nav");
+  if(window.scrollY>80){
+    nav.style.background="rgba(235,228,217,.9)";
+    nav.style.height="82px";
+  }else{
+    nav.style.background="rgba(235,228,217,.72)";
+    nav.style.height="90px";
+  }
 });
 
-document.querySelectorAll(".big-parallax").forEach(img=>{
+const openMenu=document.getElementById("openMenu");
+const sideMenu=document.getElementById("sideMenu");
+const closeMenu=document.getElementById("closeMenu");
+const menuOverlay=document.getElementById("menuOverlay");
 
-const speed = 0.18;
-
-img.style.transform =
-`translateY(${scrolled * speed}px) scale(1.1)`;
-
-});
-
-});
-
-/* navbar bg */
-
-window.addEventListener("scroll",()=>{
-
-const nav = document.querySelector(".nav");
-
-if(window.scrollY > 80){
-
-nav.style.background = "rgba(235,228,217,0.88)";
-nav.style.height = "82px";
-
-}else{
-
-nav.style.background = "rgba(235,228,217,0.72)";
-nav.style.height = "90px";
-
-}
-
-});
-const openMenu = document.getElementById("openMenu");
-const sideMenu = document.getElementById("sideMenu");
-const closeMenu = document.getElementById("closeMenu");
-const menuOverlay = document.getElementById("menuOverlay");
-
-openMenu.addEventListener("click", () => {
+openMenu.addEventListener("click",()=>{
   sideMenu.classList.add("active");
   menuOverlay.classList.add("active");
   document.body.classList.add("menu-open");
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow="hidden";
 });
 
 function closeSideMenu(){
   sideMenu.classList.remove("active");
   menuOverlay.classList.remove("active");
   document.body.classList.remove("menu-open");
-  document.body.style.overflow = "";
+  document.body.style.overflow="";
 }
 
-closeMenu.addEventListener("click", closeSideMenu);
-menuOverlay.addEventListener("click", closeSideMenu);
+closeMenu.addEventListener("click",closeSideMenu);
+menuOverlay.addEventListener("click",closeSideMenu);
+
+document.querySelectorAll(".side-menu a").forEach(link=>{
+  link.addEventListener("click",closeSideMenu);
+});
 </script>
 
 </body>
