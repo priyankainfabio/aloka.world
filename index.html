@@ -1,321 +1,1573 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aloka.world</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aloka World</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#ebe4d9;
+  color:#2d2a27;
+  overflow-x:hidden;
+  font-family:'Inter',sans-serif;
+}
+
+/* ---------------- NAV ---------------- */
+
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:90px;
+  padding:0 50px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  z-index:999;
+  backdrop-filter:blur(18px);
+  background:rgba(235,228,217,0.72);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+}
+
+.logo{
+  font-family:'Cormorant Garamond',serif;
+  color:#b88853;
+  line-height:.85;
+}
+
+
+
+.logo span{
+  font-size:20px;
+  letter-spacing:.10em;
+}
+
+.nav-center{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:70px;
+}
+
+.nav-center a{
+  text-decoration:none;
+  color:#26231f;
+  font-size:14px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  position:relative;
+}
+
+.nav-center a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-10px;
+  width:0%;
+  height:1px;
+  background:#b88853;
+  transition:.5s;
+}
+
+.nav-center a:hover::after{
+  width:100%;
+}
+
+/* right menu */
+
+.menu-btn{
+  width:52px;
+  height:42px;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:center;
+  gap:8px;
+  position:relative;
+  z-index:900;
+}
+
+.menu-btn span{
+  display:block;
+  height:1.5px;
+  background:#b88853;
+  transition:.35s ease;
+}
+
+.menu-btn span:nth-child(1){ width:14px; }
+.menu-btn span:nth-child(2){ width:26px; }
+.menu-btn span:nth-child(3){ width:38px; }
+
+.menu-btn:hover span{
+  width:38px;
+}
+.menu-btn.is-hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+.menu-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.35);
+  opacity:0;
+  visibility:hidden;
+  transition:.45s ease;
+  z-index:1000;
+}
+
+.menu-overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+
+.side-menu{
+  position:fixed;
+  top:0;
+  right:-480px;
+  width:480px;
+  height:100vh;
+  background:#efe7dc;
+  z-index:1300;
+  padding:110px 48px;
+  transition:.65s cubic-bezier(.77,0,.18,1);
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+
+.side-menu.active{
+  right:0;
+}
+
+.side-menu a{
+  font-family:'Cormorant Garamond',serif;
+  font-size:42px;
+  color:#2d2a27;
+  text-decoration:none;
+  border-bottom:1px solid rgba(0,0,0,.12);
+  padding-bottom:18px;
+  transition:.35s ease;
+}
+
+.side-menu a:hover{
+  color:#b88853;
+  transform:translateX(10px);
+}
+
+body.menu-open .menu-btn{
+  display:none !important;
+}
+
+.close-menu{
+  position:absolute;
+  top:44px;
+  right:48px;
+  width:38px;
+  height:38px;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  z-index:9999;
+}
+
+.close-menu::before,
+.close-menu::after{
+  content:"";
+  position:absolute;
+  left:4px;
+  top:18px;
+  width:32px;
+  height:1.5px;
+  background:#b88853;
+}
+
+.close-menu::before{
+  transform:rotate(45deg);
+}
+
+.close-menu::after{
+  transform:rotate(-45deg);
+}
+
+/* ---------------- HERO ---------------- */
+
+.hero{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+}
+
+.hero img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:scale(1.1);
+  transition:transform .4s ease-out;
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,
+  rgba(0,0,0,.1),
+  rgba(0,0,0,.25));
+}
+
+.hero-content{
+  position:absolute;
+  bottom:120px;
+  left:80px;
+  max-width:850px;
+  color:white;
+}
+
+.hero-sub{
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  margin-bottom:25px;
+  font-size:12px;
+  opacity:.85;
+}
+
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:110px;
+  line-height:.88;
+  font-weight:500;
+}
+
+.hero p{
+  margin-top:35px;
+  font-size:18px;
+  max-width:620px;
+  line-height:1.8;
+  opacity:.9;
+}
+
+/* ---------------- PANELS ---------------- */
+
+.story-panel{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+}
+
+.story-content{
+  padding:110px;
+}
+
+.label{
+  color:#b88853;
+  text-transform:uppercase;
+  letter-spacing:.28em;
+  font-size:12px;
+  margin-bottom:30px;
+}
+
+.story-content h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:86px;
+  line-height:.92;
+  font-weight:500;
+  margin-bottom:35px;
+}
+
+.story-content p{
+  font-size:18px;
+  line-height:2;
+  color:#514a42;
+  max-width:540px;
+}
+
+.story-image{
+  position:relative;
+  height:100%;
+  overflow:hidden;
+}
+
+.story-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .25s linear;
+  transform:scale(1.06);
+}
+
+/* alternating */
+
+.story-panel.reverse .story-content{
+  order:2;
+}
+
+.story-panel.reverse .story-image{
+  order:1;
+}
+
+/* floating card effect */
+
+.story-content{
+  z-index:2;
+}
+
+.story-content-inner{
+  background:rgba(255,255,255,.24);
+  backdrop-filter:blur(18px);
+  padding:70px;
+  border:1px solid rgba(0,0,0,.05);
+  transform-style:preserve-3d;
+  transition:.5s;
+}
+
+.story-content-inner:hover{
+  transform:
+  rotateX(3deg)
+  rotateY(-4deg)
+  translateY(-10px);
+}
+
+
+/* =========================
+   MAGAZINE SECTION
+========================= */
+
+.magazine-section{
+  min-height:100vh;
+  background:#efe8de;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  align-items:center;
+
+  padding:
+  120px
+  0
+  120px
+  90px;
+
+  overflow:hidden;
+}
+
+.magazine-left h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:78px;
+  line-height:.95;
+  font-weight:500;
+  color:#2a2622;
+  margin-bottom:35px;
+}
+
+.magazine-left p{
+  max-width:560px;
+  line-height:1.9;
+  color:#5f584f;
+  font-size:18px;
+  margin-bottom:45px;
+}
+
+.mag-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px 40px;
+  border:1px solid #2b2723;
+  text-decoration:none;
+  color:#2b2723;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:12px;
+  transition:.45s;
+}
+
+.mag-btn:hover{
+  background:#2b2723;
+  color:#f4eee6;
+  transform:translateY(-4px);
+}
+
+/* RIGHT SIDE */
+
+.magazine-right{
+  position:relative;
+
+  height:100vh;
+
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+
+  overflow:hidden;
+}
+
+.book-stack{
+  position:relative;
+
+  width:100%;
+  height:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+
+  padding-right:-120px;
+}
+
+/* MAIN MAGAZINE */
+
+.book-main{
+
+  width:980px !important;
+
+  max-width:none;
+
+  height:auto;
+
+  position:absolute;
+
+  right:-70px;
+  top:50%;
+
+  transform:
+  translateY(-50%)
+  perspective(3000px)
+  rotateY(-12deg)
+  rotateX(2deg)
+  rotateZ(-2deg);
+
+  filter:
+  drop-shadow(0 80px 70px rgba(0,0,0,.16));
+
+  transition:
+  transform 1s cubic-bezier(.19,1,.22,1);
+
+}
+
+/* HOVER EFFECT */
+
+.book-stack:hover .book-main{
+
+  transform:
+  translateY(-52%)
+  perspective(3000px)
+  rotateY(-8deg)
+  rotateX(1deg)
+  rotateZ(-1deg)
+  scale(1.015);
+
+}
+
+/* HIDDEN OLD STACKS */
+
+.book-bottom,
+.book-middle{
+  display:none;
+}
+
+
+/* FLOAT */
+
+@keyframes floatBook{
+
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-18px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+  .magazine-section{
+    grid-template-columns:1fr;
+    gap:90px;
+    padding:120px 40px;
+  }
+
+  .magazine-left h2{
+    font-size:92px;
+  }
+
+  .magazine-right{
+    height:560px;
+    max-width: 720px;
+  }
+
+  .book-stack{
+    width:320px;
+    height:450px;
+  }
+
+}
+
+.about-awards-section{
+  min-height:100vh;
+  background:#fffaf3;
+  padding:120px 70px;
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:80px;
+  align-items:center;
+  border-top:1px solid rgba(0,0,0,.06);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+
+.about-awards-main{
+  max-width:860px;
+  margin:0 auto;
+  text-align:center;
+}
+
+.trust-seal{
+  width:118px;
+  height:118px;
+  border:1px solid rgba(0,0,0,.2);
+  border-radius:50%;
+  margin:0 auto 34px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  color:#b88853;
+}
+
+.trust-seal span{
+  font-family:'Cormorant Garamond',serif;
+  font-size:42px;
+  line-height:1;
+}
+
+.trust-seal p{
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  max-width:82px;
+  line-height:1.4;
+  margin-top:6px;
+  color:#777;
+}
+.heritage-seal-img{
+  width:300px;
+  display:block;
+  margin:0 auto 12px;
+  opacity:.96;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.06));
+}
+
+.about-awards-main h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:58px;
+  font-weight:500;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  margin-top:-1px;
+  margin-bottom:6px;
+  line-height:1;
+}
+
+.about-awards-main h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:30px;
+  font-weight:500;
+  line-height:1.2;
+  margin-bottom:34px;
+}
+
+.about-awards-main p{
+  font-family:Georgia,serif;
+  font-size:18px;
+  line-height:1.8;
+  color:#2f2b26;
+  margin:0 auto 28px;
+  max-width:820px;
+}
+
+.black-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:28px;
+  padding:18px 46px;
+  background:#111;
+  color:#fff;
+  text-decoration:none;
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px;
+  letter-spacing:.04em;
+  transition:.35s ease;
+}
+
+.black-btn:hover{
+  background:#b88853;
+  transform:translateY(-4px);
+}
+
+.awards-side{
+  border-left:1px solid rgba(0,0,0,.12);
+  padding-left:34px;
+}
+
+.side-label{
+  font-size:11px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:#b88853;
+  margin-bottom:24px;
+}
+
+.award-item{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;
+  line-height:1.2;
+  padding:18px 0;
+  border-bottom:1px solid rgba(0,0,0,.1);
+  color:#2d2a27;
+}
+
+@media(max-width:1000px){
+  .about-awards-section{
+    grid-template-columns:1fr;
+    padding:90px 28px;
+  }
+
+  .awards-side{
+    border-left:0;
+    padding-left:0;
+  }
+}
+
+/* ---------------- REFLECTIONS ---------------- */
+
+.reflections{
+  padding:100px 50px;
+}
+
+.reflections-title{
+  margin-bottom:50px;
+}
+
+.reflections-title h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:92px;
+  font-weight:500;
+}
+
+.reflection-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:35px;
+}
+
+.ref-card{
+  background:#f5efe5;
+  border:1px solid rgba(0,0,0,.06);
+  overflow:hidden;
+  transition:.5s;
+}
+
+.ref-card:hover{
+  transform:translateY(-15px);
+}
+
+.ref-card-img{
+  height:420px;
+  overflow:hidden;
+}
+
+.ref-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:1s;
+}
+
+.ref-card:hover img{
+  transform:scale(1.08);
+}
+
+.ref-card-content{
+  padding:35px;
+}
+
+.ref-card-content h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:42px;
+  margin-bottom:18px;
+  font-weight:500;
+}
+
+.ref-card-content p{
+  line-height:1.9;
+  color:#5a534b;
+}
+
+/* =========================
+   PREMIUM FOOTER
+========================= */
+
+.footer{
+  position:relative;
+  background:
+  radial-gradient(circle at 85% 60%, rgba(184,136,83,.12), transparent 28%),
+  #14110f;
+
+  color:#e7dccd;
+
+  padding:110px 70px 38px;
+
+  overflow:hidden;
+}
+
+/* TOP */
+
+.footer-top{
+  display:grid;
+  grid-template-columns:1.4fr .8fr .8fr .9fr;
+  gap:80px;
+
+  padding-bottom:70px;
+
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+/* BRAND */
+
+.footer-brand{
+  max-width:520px;
+}
+
+.footer-logo-box{
+  margin-bottom:18px;
+}
+
+.footer-logo-box img{
+  width:220px;
+  display:block;
+  opacity:.96;
+
+  filter:
+  drop-shadow(0 10px 22px rgba(184,136,83,.12));
+}
+
+.footer-brand p{
+  font-size:18px;
+  line-height:2;
+  color:#b8ab99;
+  margin-bottom:34px;
+}
+
+/* STATS */
+
+.footer-stats{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.footer-stat{
+  border:1px solid rgba(255,255,255,.1);
+  padding:14px 18px;
+
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+
+  color:#f1e6d7;
+
+  background:rgba(255,255,255,.02);
+}
+
+/* TITLES */
+
+.footer-col h4{
+  color:#b88853;
+  margin-bottom:28px;
+
+  font-size:12px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+
+/* LINKS */
+
+.footer-col a{
+  display:block;
+
+  color:#e7dccd;
+  text-decoration:none;
+
+  margin-bottom:18px;
+
+  font-size:18px;
+
+  transition:.35s ease;
+}
+
+.footer-col a:hover{
+  color:#b88853;
+  transform:translateX(6px);
+}
+
+/* CONTACT */
+
+.footer-contact-item{
+  font-size:18px;
+  line-height:1.9;
+  color:#d5c8b8;
+  margin-bottom:18px;
+}
+
+/* SOCIAL */
+
+.footer-social{
+  display:flex;
+  gap:12px;
+  margin-top:30px;
+}
+
+.footer-social a{
+  width:48px;
+  height:48px;
+
+  border:1px solid rgba(255,255,255,.12);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(255,255,255,.02);
+
+  transition:.35s ease;
+}
+
+.footer-social a:hover{
+  background:#b88853;
+  border-color:#b88853;
+
+  transform:translateY(-4px);
+}
+
+/* BOTTOM */
+
+.footer-bottom{
+  padding-top:28px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+
+  flex-wrap:wrap;
+}
+
+/* LEGAL */
+
+.footer-legal{
+  display:flex;
+  gap:34px;
+}
+
+.footer-legal a{
+  color:#8f857a;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.footer-legal a:hover{
+  color:#b88853;
+}
+
+/* COPYRIGHT */
+
+.footer-copy{
+  color:#8f857a;
+  font-size:15px;
+}
+
+/* SITE CREDIT */
+
+.site-credit{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.site-credit-inner{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+
+  padding:10px 16px;
+
+  border-radius:14px;
+
+  border:1px solid rgba(255,255,255,.12);
+
+  background:rgba(255,255,255,.03);
+
+  transition:.35s ease;
+}
+
+.site-credit-inner:hover{
+  background:rgba(255,255,255,.06);
+}
+
+.site-credit-inner a{
+  opacity:.88;
+  transition:.3s;
+}
+
+.site-credit-inner a:hover{
+  opacity:1;
+}
+
+.site-credit-inner img{
+  height:12px;
+  width:auto;
+  display:block;
+}
+
+.site-divider{
+  width:1px;
+  height:12px;
+  background:rgba(255,255,255,.22);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+  .footer{
+    padding:90px 30px 34px;
+  }
+
+  .footer-top{
+    grid-template-columns:1fr;
+    gap:55px;
+  }
+
+  .footer-bottom{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}
+
+/* ---------------- reveal ---------------- */
+
+.reveal{
+  opacity:0;
+  transform:translateY(80px);
+  transition:1.2s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ---------------- responsive ---------------- */
+
+@media(max-width:1100px){
+
+  .story-panel{
+    grid-template-columns:1fr;
+  }
+
+  .story-panel.reverse .story-content{
+    order:1;
+  }
+
+  .story-panel.reverse .story-image{
+    order:2;
+  }
+
+  .story-image{
+    height:70vh;
+  }
+
+  .reflection-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:70px;
+  }
+
+  .story-content h2,
+  .full-content h2,
+  .reflections-title h2{
+    font-size:58px;
+  }
+
+  .footer-top{
+    flex-direction:column;
+    gap:60px;
+  }
+
+  .nav-center{
+    display:none;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
 
-<header class="site-header">
-  <a href="#" class="brand">
-    <strong>Aloka</strong>
-    <span>WORLD</span>
+<!-- NAV -->
+
+<nav class="nav">
+
+  <div class="logo">
+    
+    <span>aloka.world</span>
+  </div>
+
+  <div class="nav-center">
+    <a href="#">About</a>
+    <a href="#">Wonderful World</a>
+    <a href="#">Reflections</a>
+  </div>
+
+  <button class="menu-btn" id="openMenu" aria-label="Open menu">
+  <span></span><span></span><span></span>
+</button>
+
+</nav>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<div class="side-menu" id="sideMenu">
+  <button class="close-menu" id="closeMenu" aria-label="Close menu"></button>
+
+  <a href="#">Magnum Editions</a>
+  <a href="#">Aloka</a>
+  <a href="#">Aloka Memorial Trust</a>
+  <a href="#">Press & Recognition</a>
+  <a href="#">Correspondence</a>
+</div>
+
+
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1800&auto=format&fit=crop">
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+
+    <div class="hero-sub">
+      Landscapes • Memory • Stewardship
+    </div>
+
+    <h1>
+      A Life<br>
+      Toward Wonder
+    </h1>
+
+    <p>
+      A quiet cultural journal exploring landscapes,
+      memory, conservation, and the enduring dialogue
+      between geography and civilization.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- PANEL 1 -->
+
+<section class="story-panel reveal">
+
+  <div class="story-content">
+
+    <div class="story-content-inner">
+
+      <div class="label">
+        About
+      </div>
+
+      <h2>
+        Landscapes<br>
+        Remember
+      </h2>
+
+      <p>
+        Across decades of travel and cultural reflection,
+        Aloka World emerged from a belief that landscapes
+        are not merely scenery. They hold memory,
+        identity, silence, and inheritance.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="story-image">
+    <img class="parallax" src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=1600&auto=format&fit=crop">
+  </div>
+
+</section>
+
+<!-- PANEL 2 -->
+
+<section class="story-panel reverse reveal">
+
+  <div class="story-content">
+
+    <div class="story-content-inner">
+
+      <div class="label">
+        Wonderful World
+      </div>
+
+      <h2>
+        Quiet Civilisations
+      </h2>
+
+      <p>
+        The Wonderful World series reflects on places
+        where silence, ecological dignity, and cultural
+        continuity still survive beyond modern excess.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="story-image">
+    <img class="parallax" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop">
+  </div>
+
+</section>
+
+<!-- MAGAZINE SECTION -->
+
+<section class="magazine-section reveal">
+
+  <div class="magazine-left">
+
+    <div class="label">
+      Publishing Journal
+    </div>
+
+    <h2>
+      The Cultural Journal<br>
+      for Wonder Seekers
+    </h2>
+
+    <p>
+      Dedicated to landscapes, memory, conservation,
+      and cultural reflection, Aloka World presents
+      essays, visual journeys, and long-form storytelling
+      inspired by quiet civilizations and enduring places.
+    </p>
+
+    <a href="#" class="mag-btn">
+      Explore Reflections
+    </a>
+
+  </div>
+
+  <div class="magazine-right">
+
+    <div class="book-stack">
+
+  <img 
+    class="book-main"
+    src="/assets/book.png"
+    alt="Wonderful World Journal"
+  >
+
+</div>
+
+  </div>
+
+</section>
+
+<section class="about-awards-section reveal">
+
+  <div class="about-awards-main">
+
+    <img src="/assets/seal.png" alt="Aloka Seal" class="heritage-seal-img">
+
+    <h2>Aloka World</h2>
+
+    <h3>The Cultural Journal of Landscapes, Memory & Stewardship</h3>
+
+    <p>
+      Aloka World is a quiet cultural platform dedicated to visual storytelling,
+      conservation, publishing, and reflective essays on nature, nations,
+      memory, and civilisational responsibility.
+    </p>
+
+    <p>
+      The work brings together long-form visual journeys, field notes,
+      publishing initiatives, and cultural reflections shaped by travel,
+      service, leadership, and a deep belief in preservation.
+    </p>
+
+    <a href="#" class="black-btn">Why This Work Matters?</a>
+
+  </div>
+
+  <aside class="awards-side">
+
+    <div class="side-label">Press & Recognition</div>
+
+    <div class="award-item">Vishisht Seva Medal</div>
+    <div class="award-item">Times Power Icon 2018</div>
+    <div class="award-item">Monochrome Photography Awards 2020</div>
+    <div class="award-item">Forbes India</div>
+    <div class="award-item">Hindustan Times</div>
+    <div class="award-item">Bloomsbury Publishing</div>
+    <div class="award-item">Architect & Interiors India</div>
+    <div class="award-item">Decor Journal India</div>
+    <div class="award-item">Hospitality News</div>
+
+  </aside>
+
+</section>
+
+<!-- REFLECTIONS -->
+
+<section class="reflections reveal">
+
+  <div class="reflections-title"></div>
+
+    <div class="label">
+      Essays & Field Notes
+    </div>
+
+    <h2>
+      Reflections
+    </h2>
+
+  </div>
+
+  <div class="reflection-grid">
+
+    <div class="ref-card">
+
+      <div class="ref-card-img">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1400&auto=format&fit=crop">
+      </div>
+
+      <div class="ref-card-content">
+
+        <h3>
+          Morocco
+        </h3>
+
+        <p>
+          Landscapes do not merely appear beautiful;
+          they feel inhabited by memory.
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="ref-card">
+
+      <div class="ref-card-img">
+        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=1400&auto=format&fit=crop">
+      </div>
+
+      <div class="ref-card-content">
+
+        <h3>
+          Silence
+        </h3>
+
+        <p>
+          Silence survives only where societies consciously
+          protect scale and ecological dignity.
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="ref-card">
+
+      <div class="ref-card-img">
+        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1400&auto=format&fit=crop">
+      </div>
+
+      <div class="ref-card-content">
+
+        <h3>
+          Stewardship
+        </h3>
+
+        <p>
+          Preservation is not nostalgia —
+          it is responsibility toward continuity.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+  <div class="footer-top">
+
+    <!-- BRAND -->
+    <div class="footer-brand">
+
+      <div class="footer-logo-box">
+        <img src="/assets/seal.png" alt="Aloka World">
+      </div>
+
+      <p>
+        Aloka World is a quiet cultural journal exploring
+        landscapes, memory, stewardship, publishing,
+        and reflective storytelling across civilizations.
+      </p>
+
+      <div class="footer-stats">
+        <div class="footer-stat">Publishing Journal</div>
+        <div class="footer-stat">Visual Essays</div>
+        <div class="footer-stat">Since 2008</div>
+      </div>
+
+    </div>
+
+    <!-- EXPLORE -->
+    <div class="footer-col">
+
+      <h4>Explore</h4>
+
+      <a href="#">About</a>
+      <a href="#">Wonderful World</a>
+      <a href="#">Reflections</a>
+      <a href="#">Correspondence</a>
+
+    </div>
+
+    <!-- CONTACT -->
+    <div class="footer-col">
+
+      <h4>Contact</h4>
+
+      <div class="footer-contact-item">
+        contact@aloka.world
+      </div>
+
+      <div class="footer-contact-item">
+        Publishing Division
+      </div>
+
+      <div class="footer-contact-item">
+        Press & Recognition
+      </div>
+
+    </div>
+
+    <!-- OFFICE -->
+    <div class="footer-col">
+
+      <h4>Head Office</h4>
+
+      <div class="footer-contact-item">
+        Cultural Publishing House<br>
+        New Delhi, India
+      </div>
+
+<div class="footer-social">
+
+  <a href="#">
+    <i class="fab fa-instagram"></i>
   </a>
 
-  <nav class="main-nav">
-    <a href="#wonderful">Wonderful World</a>
-    <a href="#reflections">Reflections</a>
-    <a href="#about">About</a>
-  </nav>
+  <a href="#">
+    <i class="fab fa-pinterest-p"></i>
+  </a>
 
-  <button class="menu-btn" id="openMenu">☰</button>
-</header>
+  <a href="#">
+    <i class="fab fa-youtube"></i>
+  </a>
 
-<div class="overlay" id="overlay"></div>
+</div>
 
-<aside class="sidebar" id="sidebar">
-  <button class="close-btn" id="closeMenu">Close</button>
+    </div>
 
-  <div class="sidebar-inner">
-    <span>More</span>
-    <a href="#magnum">Magnum Editions</a>
-    <a href="#aloka">Aloka</a>
-    <a href="#trust">Aloka Memorial Trust</a>
-    <a href="#press">Press & Recognition</a>
-    <a href="#correspondence">Correspondence</a>
   </div>
-</aside>
 
-<main>
+  <!-- BOTTOM -->
+  <div class="footer-bottom">
 
-  <!-- HERO -->
-  <section class="hero">
-    <img src="assets/grain.png" alt="Wonderful World">
-    <div class="hero-content">
-      <h1>Wonderful World</h1>
-      <p>Cultural works on nature, nations, memory, and conservation</p>
-      <span></span>
-    </div>
-  </section>
-
-  <!-- FEATURED ESSAY -->
-  <section class="featured section-3d">
-    <div class="image-frame">
-      <img src="assets/morocco.jpg" alt="Morocco">
+    <div class="footer-copy">
+      © Aloka World — Landscapes, Memory & Stewardship
     </div>
 
-    <div class="featured-copy">
-      <span class="eyebrow">Featured Essay</span>
-      <h2>Morocco and the Memory of Landscapes</h2>
-      <p>
-        There are countries that impress through scale, and others that remain with you
-        through atmosphere. Morocco belongs to the latter.
-      </p>
-      <p>
-        Its landscapes do not merely appear beautiful; they feel inhabited by memory.
-        Desert light, mountain silence, ancient cities, wind-shaped earth — everything
-        seems connected by a continuity older than modern movement itself.
-      </p>
-      <a href="#reflections">Read Essay ›</a>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
     </div>
-  </section>
 
-  <!-- WONDERFUL WORLD -->
-  <section class="content-section section-3d" id="wonderful">
-    <span class="eyebrow">Cultural Series</span>
-    <h2>Wonderful World</h2>
-    <p class="lead">
-      A long-horizon body of work centred on landscapes, nations, conservation, and memory.
-    </p>
+    <!-- SITE CREDIT -->
+    <div class="site-credit">
 
-    <div class="series-grid">
-      <div class="image-frame">
-        <img src="assets/australia.jpg" alt="Australia">
+      <div class="site-credit-inner">
+
+        <a href="https://fabulousmedia.in/" target="_blank">
+          <img src="/assets/fabulous-logo.png" alt="Fabulous Media">
+        </a>
+
+        <span class="site-divider"></span>
+
+        <a href="https://gocommercially.com/" target="_blank">
+          <img src="/assets/gocommercially-logo.png" alt="GoCommercially">
+        </a>
+
       </div>
 
-      <div class="series-copy">
-        <h3>Australia’s Majestic Landscapes</h3>
-        <span>Volume I</span>
-        <p>
-          Australia changes one’s understanding of scale. Not only physical scale, but
-          civilisational scale — the scale at which a nation chooses whether wilderness
-          will survive modernity intact.
-        </p>
-        <blockquote>
-          “Silence survives only where societies consciously protect it.”
-        </blockquote>
-        <p>
-          Travel through Australia gradually reveals something rare in the contemporary
-          world: the recognition that nature is not merely a resource to be consumed,
-          but an inheritance carrying ecological, cultural, and even spiritual significance.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- REFLECTIONS -->
-  <section class="text-page section-3d" id="reflections">
-    <span class="eyebrow">Essays & Field Notes</span>
-    <h2>Reflections</h2>
-
-    <article>
-      <h3>Morocco and the Memory of Landscapes</h3>
-      <p>
-        There are countries that impress through scale, and others that remain with you
-        through atmosphere. Morocco belongs to the latter.
-      </p>
-      <p>
-        Its landscapes do not merely appear beautiful; they feel inhabited by memory.
-      </p>
-      <a href="#">Read More →</a>
-    </article>
-
-    <article>
-      <h3>On Preservation and Responsibility</h3>
-      <p>
-        Countries are remembered not only through economic achievement or political
-        influence, but also through what they choose to preserve.
-      </p>
-      <a href="#">Read More →</a>
-    </article>
-
-    <article>
-      <h3>The Civilisation of Silence</h3>
-      <p>
-        Silence is increasingly rare in the modern world. It survives only where societies
-        consciously protect space, scale, and ecological dignity against the pressures of
-        excess and speed.
-      </p>
-      <a href="#">Read More →</a>
-    </article>
-
-    <em class="note">
-      These reflections form part of ongoing cultural and conservation work, developed
-      with care and intellectual depth.
-    </em>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="text-page section-3d" id="about">
-    <span class="eyebrow">About</span>
-    <h2>A Life Toward Wonder</h2>
-
-    <p>
-      I did not begin my life intending to create books. Much of my early life was shaped
-      instead by service, engineering, leadership, and movement across very different worlds.
-    </p>
-
-    <p>
-      I was trained at the National Defence Academy and commissioned into the Indian Army,
-      where I served for over two decades. The Army shaped my understanding of leadership,
-      discipline, responsibility, and the deeper relationship between geography, culture,
-      and nationhood. For my service, I was awarded the Vishisht Seva Medal (VSM).
-    </p>
-
-    <p>
-      Alongside military service, I pursued studies in engineering and later management,
-      eventually moving into leadership roles across the technology sector after leaving
-      the Army. Yet over time another question began to grow quietly beneath it all:
-      <em>What deserves to endure?</em>
-    </p>
-
-    <p>
-      Photography had long remained a parallel journey. Travel across more than sixty
-      countries gradually revealed something that would later shape the direction of my work —
-      that landscapes are not merely scenery. They are memory. Identity. Inheritance.
-    </p>
-  </section>
-
-  <!-- MAGNUM -->
-  <section class="text-page small-page section-3d" id="magnum">
-    <span class="eyebrow">Publishing</span>
-    <h2>Magnum Editions</h2>
-    <p>
-      Current and future works within the Wonderful World series are being developed under
-      Magnum Editions, an independent cultural publishing platform dedicated to long-form
-      visual works and enduring editions.
-    </p>
-  </section>
-
-  <!-- ALOKA -->
-  <section class="aloka-section section-3d" id="aloka">
-    <div>
-      <span class="eyebrow">In Memory</span>
-      <h2>Aloka</h2>
-      <pre>
-You remain beside me—
-quiet as light,
-present in distant horizons,
-fleeting silences,
-and every place where beauty still survives.</pre>
-      <p>If these works carry wonder, it is because your memory walks within them.</p>
     </div>
 
-    <div class="image-frame">
-      <img src="assets/aloka.jpg" alt="Aloka">
-    </div>
-  </section>
-
-  <!-- TRUST -->
-  <section class="text-page small-page section-3d" id="trust">
-    <h2>Aloka Memorial Trust</h2>
-
-    <p>
-      The Aloka Memorial Trust was established in memory of my sister, Aloka, whose absence
-      quietly shaped much of the emotional direction of my later life and work.
-    </p>
-
-    <p>
-      Its purpose is to support thoughtful initiatives connected with nature, conservation,
-      ecological awareness, and meaningful social contribution. The intention is not scale
-      for its own sake, but sincerity, continuity, and long-term value.
-    </p>
-
-    <p>
-      In an increasingly transient world, preservation has become more than an environmental
-      concern. It is also a cultural and moral one.
-    </p>
-
-    <em>
-      The work will evolve gradually and with care — guided less by visibility than by substance.
-    </em>
-  </section>
-
-  <!-- PRESS -->
-  <section class="text-page small-page section-3d" id="press">
-    <span class="eyebrow">Press & Recognition</span>
-    <h2>Cultural Dialogue</h2>
-
-    <p>
-      The work presented through Wonderful World and related cultural initiatives exists at
-      the intersection of landscape, visual storytelling, memory, and conservation-oriented
-      thought.
-    </p>
-
-    <span class="eyebrow sub">Selected Publications</span>
-
-    <div class="press-grid">
-      <div>Forbes India</div>
-      <div>Hindustan Times</div>
-      <div>Bloomsbury Publishing</div>
-      <div>Architect and Interiors India</div>
-      <div>Decor Journal India</div>
-      <div>Hospitality News</div>
-    </div>
-
-    <hr>
-
-    <span class="eyebrow sub">Selected Recognition</span>
-    <p>Awarded the Vishisht Seva Medal (VSM) for distinguished service in the Indian Army.</p>
-    <p>Times Power Icon 2018.</p>
-    <p>Honorable Mention — Monochrome Photography Awards 2020.</p>
-  </section>
-
-  <!-- CORRESPONDENCE -->
-  <section class="text-page small-page section-3d" id="correspondence">
-    <span class="eyebrow">Stay Connected</span>
-    <h2>Correspondence</h2>
-
-    <p>
-      Occasional reflections, essays, and updates from ongoing cultural and conservation work.
-      The correspondence remains intentionally infrequent and thoughtful.
-    </p>
-
-    <form>
-      <input type="email" placeholder="Your email address">
-      <button>Subscribe</button>
-    </form>
-
-    <em>No noise. No promotional cadence. Only occasional and meaningful communication.</em>
-
-    <div class="contact-block">
-      <p>For cultural collaborations, publishing conversations, exhibitions, conservation dialogue, institutional partnerships, and patron enquiries:</p>
-      <a href="mailto:contact@aloka.world">contact@aloka.world</a>
-      <em>Meaningful work is often built through quiet correspondence.</em>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div>
-    <strong>Aloka</strong>
-    <span>WORLD</span>
-    <p>A digital cultural journal celebrating landscapes, memory, and stewardship.</p>
   </div>
 
-  <div>
-    <h4>Explore</h4>
-    <a href="#wonderful">Wonderful World</a>
-    <a href="#reflections">Reflections</a>
-    <a href="#about">About</a>
-  </div>
-
-  <div>
-    <h4>More</h4>
-    <a href="#trust">Aloka Memorial Trust</a>
-    <a href="#press">Press & Recognition</a>
-    <a href="#correspondence">Correspondence</a>
-  </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+
+/* reveal */
+
+const reveals = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+entry.target.classList.add("active");
+}
+
+});
+
+},{
+threshold:0.12
+});
+
+reveals.forEach(el=>{
+observer.observe(el);
+});
+
+/* parallax */
+
+window.addEventListener("scroll",()=>{
+
+const scrolled = window.scrollY;
+
+document.querySelectorAll(".parallax").forEach(img=>{
+
+const speed = 0.08;
+img.style.transform =
+`scale(1.08) translateY(${scrolled * speed}px)`;
+
+});
+
+document.querySelectorAll(".big-parallax").forEach(img=>{
+
+const speed = 0.18;
+
+img.style.transform =
+`translateY(${scrolled * speed}px) scale(1.1)`;
+
+});
+
+});
+
+/* navbar bg */
+
+window.addEventListener("scroll",()=>{
+
+const nav = document.querySelector(".nav");
+
+if(window.scrollY > 80){
+
+nav.style.background = "rgba(235,228,217,0.88)";
+nav.style.height = "82px";
+
+}else{
+
+nav.style.background = "rgba(235,228,217,0.72)";
+nav.style.height = "90px";
+
+}
+
+});
+const openMenu = document.getElementById("openMenu");
+const sideMenu = document.getElementById("sideMenu");
+const closeMenu = document.getElementById("closeMenu");
+const menuOverlay = document.getElementById("menuOverlay");
+
+openMenu.addEventListener("click", () => {
+  sideMenu.classList.add("active");
+  menuOverlay.classList.add("active");
+  document.body.classList.add("menu-open");
+  document.body.style.overflow = "hidden";
+});
+
+function closeSideMenu(){
+  sideMenu.classList.remove("active");
+  menuOverlay.classList.remove("active");
+  document.body.classList.remove("menu-open");
+  document.body.style.overflow = "";
+}
+
+closeMenu.addEventListener("click", closeSideMenu);
+menuOverlay.addEventListener("click", closeSideMenu);
+</script>
+
 </body>
 </html>
