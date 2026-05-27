@@ -672,70 +672,185 @@ body.menu-open .menu-btn{
   }
 }
 
-/* ---------------- REFLECTIONS ---------------- */
+/* =========================
+   ALOKA APPROACH SECTION
+========================= */
 
-.reflections{
-  padding:100px 50px;
-}
-
-.reflections-title{
-  margin-bottom:50px;
-}
-
-.reflections-title h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:92px;
-  font-weight:500;
-}
-
-.reflection-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:35px;
-}
-
-.ref-card{
-  background:#f5efe5;
-  border:1px solid rgba(0,0,0,.06);
-  overflow:hidden;
-  transition:.5s;
-}
-
-.ref-card:hover{
-  transform:translateY(-15px);
-}
-
-.ref-card-img{
-  height:420px;
+.aloka-approach{
+  padding:100px 40px 90px;
+  background:#f8f4ee;
+  position:relative;
   overflow:hidden;
 }
 
-.ref-card img{
+.approach-frame{
+  max-width:1500px;
+  min-height:560px;
+  margin:0 auto;
+  position:relative;
+  padding:95px 90px 70px;
+  border:1px solid rgba(176,136,76,.42);
+  border-radius:38px 38px 210px 210px;
+  background:
+    radial-gradient(circle at 50% 34%, rgba(255,255,255,.96), rgba(255,255,255,.75) 48%, rgba(248,244,238,.9)),
+    #fbf8f2;
+  overflow:hidden;
+}
+
+.approach-frame::before{
+  content:"";
+  position:absolute;
+  inset:28px;
+  border:1px solid rgba(176,136,76,.24);
+  border-radius:28px 28px 185px 185px;
+  pointer-events:none;
+  z-index:2;
+}
+
+.approach-seal{
+  position:absolute;
+  top:-0.15px;
+  left:50%;
+  transform:translateX(-50%);
+  width:88px;
+  height:88px;
+  border-radius:50%;
+  border:1px solid rgba(176,136,76,.5);
+  background:#f8f4ee;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:8;
+}
+
+.approach-seal span{
+  font-family:"Cormorant Garamond",serif;
+  font-size:56px;
+  color:#b0884c;
+  line-height:1;
+}
+
+.approach-symbols{
+  display:flex;
+  justify-content:center;
+  gap:42px;
+  color:#b0884c;
+  font-size:23px;
+  opacity:.8;
+  margin-bottom:46px;
+  position:relative;
+  z-index:5;
+}
+
+.approach-content{
+  text-align:center;
+  max-width:920px;
+  margin:0 auto;
+  position:relative;
+  z-index:5;
+}
+
+.approach-label{
+  font-size:12px;
+  letter-spacing:.38em;
+  color:#b0884c;
+  margin-bottom:24px;
+  font-family:"Inter",sans-serif;
+}
+
+.approach-content h2{
+  font-family:"Cormorant Garamond",serif;
+  font-size:88px;
+  line-height:.92;
+  font-weight:400;
+  color:#111;
+  margin:0 0 28px;
+}
+
+.approach-divider{
+  width:180px;
+  height:1px;
+  background:rgba(176,136,76,.5);
+  margin:0 auto 34px;
+  position:relative;
+}
+
+.approach-divider::before{
+  content:"✦";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  background:#fbf8f2;
+  padding:0 14px;
+  color:#b0884c;
+  font-size:13px;
+}
+
+.approach-content p{
+  font-family:"Cormorant Garamond",serif;
+  font-size:29px;
+  line-height:1.75;
+  color:#5b5248;
+  max-width:930px;
+  margin:0 auto;
+}
+
+.approach-content em{
+  color:#b0884c;
+  font-style:italic;
+}
+
+.approach-btn{
+  margin-top:48px;
+  display:inline-flex;
+  align-items:center;
+  gap:18px;
+  padding:19px 46px;
+  border:1px solid rgba(176,136,76,.55);
+  color:#2b2723;
+  letter-spacing:.22em;
+  font-size:12px;
+  text-decoration:none;
+  transition:.45s ease;
+  background:rgba(255,255,255,.55);
+}
+
+.approach-btn:hover{
+  background:#111;
+  color:#fff;
+  transform:translateY(-5px);
+}
+
+.art-left{
+  position:absolute;
+  bottom:0;
   width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:1s;
+  height:300px;
+  opacity:60;
+  filter:grayscale(100%) sepia(35%) contrast(.95);
+  mix-blend-mode:multiply;
+  pointer-events:none;
+  z-index:1;
+
+  -webkit-mask-image:
+    linear-gradient(to top, black 0%, rgba(0,0,0,.75) 38%, transparent 100%);
+  mask-image:
+    linear-gradient(to top, black 0%, rgba(0,0,0,.75) 38%, transparent 100%);
+
+  background-size:cover;
+  background-position:center bottom;
+  background-repeat:no-repeat;
 }
 
-.ref-card:hover img{
-  transform:scale(1.08);
+.art-left{
+  left:0;
+  background-image:url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1400&auto=format&fit=crop");
 }
 
-.ref-card-content{
-  padding:35px;
-}
 
-.ref-card-content h3{
-  font-family:'Cormorant Garamond',serif;
-  font-size:42px;
-  margin-bottom:18px;
-  font-weight:500;
-}
 
-.ref-card-content p{
-  line-height:1.9;
-  color:#5a534b;
-}
+
 
 /* =========================
    PREMIUM FOOTER
@@ -1271,89 +1386,63 @@ body.menu-open .menu-btn{
 
 </section>
 
-<!-- REFLECTIONS -->
 
-<section class="reflections reveal">
+<!-- ALOKA APPROACH SECTION -->
+<section class="aloka-approach">
+  <div class="approach-frame">
 
-  <div class="reflections-title"></div>
-
-    <div class="label">
-      Essays & Field Notes
+    <!-- TOP SEAL -->
+    <div class="approach-seal">
+      <span>A</span>
     </div>
 
-    <h2>
-      Reflections
-    </h2>
+    <!-- TOP SYMBOLS -->
+    <div class="approach-symbols">
+      <span>✧</span>
+      <span>𓂀</span>
+      <span>✧</span>
+      <span>~</span>
+      <span>◌</span>
+      <span>△</span>
+      <span>~</span>
+      <span>✧</span>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="approach-content">
+
+      <div class="approach-label">
+        ESSAYS & FIELD NOTES
+      </div>
+
+      <h2>
+        The Aloka Approach
+      </h2>
+
+      <div class="approach-divider"></div>
+
+      <p>
+        At Aloka World, every reflection begins with a simple question:
+        <em>what does a landscape remember?</em>
+        Through essays, visual journeys, and cultural notes,
+        we explore places not as destinations, but as living archives
+        of memory, silence, and stewardship.
+      </p>
+
+      <a href="#" class="approach-btn">
+        EXPLORE REFLECTIONS
+        <span>→</span>
+      </a>
+
+    </div>
+
+    <!-- LEFT ART -->
+    <div class="art-left"></div>
+
+    <!-- RIGHT ART -->
+    <div class="art-right"></div>
 
   </div>
-
-  <div class="reflection-grid">
-
-    <div class="ref-card">
-
-      <div class="ref-card-img">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1400&auto=format&fit=crop">
-      </div>
-
-      <div class="ref-card-content">
-
-        <h3>
-          Morocco
-        </h3>
-
-        <p>
-          Landscapes do not merely appear beautiful;
-          they feel inhabited by memory.
-        </p>
-
-      </div>
-
-    </div>
-
-    <div class="ref-card">
-
-      <div class="ref-card-img">
-        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=1400&auto=format&fit=crop">
-      </div>
-
-      <div class="ref-card-content">
-
-        <h3>
-          Silence
-        </h3>
-
-        <p>
-          Silence survives only where societies consciously
-          protect scale and ecological dignity.
-        </p>
-
-      </div>
-
-    </div>
-
-    <div class="ref-card">
-
-      <div class="ref-card-img">
-        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1400&auto=format&fit=crop">
-      </div>
-
-      <div class="ref-card-content">
-
-        <h3>
-          Stewardship
-        </h3>
-
-        <p>
-          Preservation is not nostalgia —
-          it is responsibility toward continuity.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
 </section>
 
 <!-- FOOTER -->
@@ -1566,6 +1655,16 @@ function closeSideMenu(){
 
 closeMenu.addEventListener("click", closeSideMenu);
 menuOverlay.addEventListener("click", closeSideMenu);
+
+const approach = document.querySelector(".approach-bg-lines");
+
+if(approach){
+  const rect = approach.getBoundingClientRect();
+  const movement = rect.top * -0.03;
+
+  approach.style.transform =
+    `perspective(1200px) rotateX(4deg) translateY(${movement}px)`;
+}
 </script>
 
 </body>
