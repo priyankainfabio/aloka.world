@@ -553,6 +553,47 @@ body.menu-open .menu-btn{
   margin:0 auto;
   text-align:center;
 }
+.intro-btn{
+  margin-top:26px;
+
+  display:inline-flex;
+  align-items:center;
+  gap:18px;
+
+  padding:22px 54px;
+
+  background:#1f1f1b;
+
+  color:#f8f4ee;
+
+  text-decoration:none;
+
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  font-size:11px;
+
+  border:1px solid rgba(184,136,83,.3);
+
+  transition:all .45s ease;
+}
+
+.intro-btn:hover{
+  background:#b88853;
+  color:white;
+
+  transform:translateY(-5px);
+
+  box-shadow:
+  0 20px 50px rgba(184,136,83,.22);
+}
+
+.intro-btn span{
+  transition:.4s ease;
+}
+
+.intro-btn:hover span{
+  transform:translateX(5px);
+}
 
 .trust-seal{
   width:118px;
@@ -671,6 +712,65 @@ body.menu-open .menu-btn{
     padding-left:0;
   }
 }
+.approach-frame::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background-image:url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+
+  opacity:.18;
+  mix-blend-mode:multiply;
+
+  pointer-events:none;
+}
+.about-awards-section{
+  position:relative;
+  overflow:hidden;
+}
+
+.about-awards-section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background-image:
+  url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+
+  opacity:.14;
+
+  mix-blend-mode:multiply;
+
+  pointer-events:none;
+
+  z-index:1;
+}
+
+.about-awards-main,
+.awards-side{
+  position:relative;
+  z-index:2;
+}
+.about-light{
+  position:absolute;
+  width:900px;
+  height:900px;
+
+  top:-280px;
+  left:-120px;
+
+  background:
+  radial-gradient(circle,
+  rgba(184,136,83,.12),
+  transparent 68%);
+
+  filter:blur(10px);
+
+  pointer-events:none;
+
+  z-index:0;
+}
+
 
 /* =========================
    ALOKA APPROACH SECTION
@@ -1195,7 +1295,7 @@ body.menu-open .menu-btn{
   </div>
 
   <div class="nav-center">
-    <a href="#">About</a>
+    <a href="#about-awards-section reveal">About</a>
     <a href="#">Wonderful World</a>
     <a href="#">Reflections</a>
   </div>
@@ -1215,7 +1315,7 @@ body.menu-open .menu-btn{
   <a href="#">Aloka</a>
   <a href="#">Aloka Memorial Trust</a>
   <a href="#">Press & Recognition</a>
-  <a href="#">Correspondence</a>
+  <a href="#">Contact Us</a>
 </div>
 
 
@@ -1280,7 +1380,7 @@ body.menu-open .menu-btn{
   </div>
 
   <div class="story-image">
-    <img class="parallax" src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?q=80&w=1600&auto=format&fit=crop">
+    <img class="parallax" src="/assets/p2.png">
   </div>
 
 </section>
@@ -1312,7 +1412,7 @@ body.menu-open .menu-btn{
   </div>
 
   <div class="story-image">
-    <img class="parallax" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop">
+    <img class="parallax" src="/assets/p1.png">
   </div>
 
 </section>
@@ -1362,6 +1462,7 @@ body.menu-open .menu-btn{
 </section>
 
 <section class="about-awards-section reveal">
+  <div class="about-light"></div>
 
   <div class="about-awards-main">
 
@@ -1369,21 +1470,38 @@ body.menu-open .menu-btn{
 
     <h2>Aloka World</h2>
 
-    <h3>The Cultural Journal of Landscapes, Memory & Stewardship</h3>
+  <p>
+    Aloka World emerged from a lifelong journey through landscapes,
+    cultures, service, and reflective observation. What began as a
+    personal relationship with photography slowly evolved into a wider
+    exploration of memory, civilisation, stewardship, and the emotional
+    geography of place.
+  </p>
 
-    <p>
-      Aloka World is a quiet cultural platform dedicated to visual storytelling,
-      conservation, publishing, and reflective essays on nature, nations,
-      memory, and civilisational responsibility.
-    </p>
+  <p>
+    Through visual essays, long-form journals, field notes, and
+    publishing initiatives, the work seeks to document places not merely
+    as destinations, but as living archives of identity, silence,
+    continuity, and inheritance.
+  </p>
 
-    <p>
-      The work brings together long-form visual journeys, field notes,
-      publishing initiatives, and cultural reflections shaped by travel,
-      service, leadership, and a deep belief in preservation.
-    </p>
+  <p>
+    The platform brings together years of travel across remote regions,
+    mountain cultures, sacred geographies, disappearing traditions, and
+    fragile ecological worlds — shaped by a deep belief that preservation
+    is not only environmental, but cultural and civilisational.
+  </p>
 
-    <a href="#" class="black-btn">Why This Work Matters?</a>
+  <p>
+    At its core, Aloka World is an ongoing reflection on how landscapes
+    shape memory, how memory shapes humanity, and how thoughtful
+    storytelling can become an act of stewardship.
+  </p>
+
+  <a href="#contact" class="intro-btn">
+    Contact Us
+    <span>→</span>
+  </a>
 
   </div>
 
@@ -1499,7 +1617,7 @@ body.menu-open .menu-btn{
       <a href="#">About</a>
       <a href="#">Wonderful World</a>
       <a href="#">Reflections</a>
-      <a href="#">Correspondence</a>
+      <a href="#">Contact Us</a>
 
     </div>
 
