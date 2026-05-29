@@ -1279,6 +1279,26 @@ body.menu-open .menu-btn{
   }
 
 }
+.logo{
+  display:flex;
+  align-items:center;
+}
+
+.logo img{
+  height:94px;
+  width:auto;
+  object-fit:contain;
+
+  filter:
+    drop-shadow(0 2px 8px rgba(176,136,76,.12));
+
+  transition:transform .4s ease, opacity .4s ease;
+}
+
+.logo img:hover{
+  transform:scale(1.04);
+  opacity:.92;
+}
 
 </style>
 </head>
@@ -1290,9 +1310,8 @@ body.menu-open .menu-btn{
 <nav class="nav">
 
   <div class="logo">
-    
-    <span>aloka.world</span>
-  </div>
+  <img src="/assets/seal.png" alt="Aloka Seal">
+</div>
 
   <div class="nav-center">
     <a href="#about">About</a>
